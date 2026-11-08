@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)file:///Users/mohammedsayyed/Documents/Codex/2026-07-20/h/outputs/flower-garden.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blooming Flower Garden</title>
+  <style>
+    :root { --ink: #02090d; --cyan: #67f4f1; --blue: #129ec2; --leaf: #0a9d83; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; overflow: hidden; background: radial-gradient(circle at 50% 74%, #062e32 0, #031419 33%, var(--ink) 72%); color: white; font-family: system-ui, sans-serif; }
+    .scene { min-height: 100vh; position: relative; display: grid; place-items: end center; perspective: 900px; }
+    .glow { position: absolute; width: 62vmin; height: 28vmin; bottom: -13vmin; border-radius: 50%; background: #03a9a044; filter: blur(5vmin); }
+    .stars i { position: absolute; width: .55vmin; height: .55vmin; border-radius: 50%; background: #77ffff; box-shadow: 0 0 1.4vmin #76ffff; animation: twinkle 2.4s ease-in-out infinite alternate; }
+    .stars i:nth-child(1){left:19%;top:22%;animation-delay:.2s}.stars i:nth-child(2){left:27%;top:38%;animation-delay:1.1s}.stars i:nth-child(3){left:41%;top:14%;animation-delay:.5s}.stars i:nth-child(4){left:55%;top:28%;animation-delay:1.5s}.stars i:nth-child(5){left:72%;top:18%;animation-delay:.7s}.stars i:nth-child(6){left:80%;top:44%;animation-delay:1.8s}.stars i:nth-child(7){left:63%;top:12%;animation-delay:1.2s}.stars i:nth-child(8){left:33%;top:25%;animation-delay:2s}
+    .garden { position: relative; width: min(86vmin, 680px); height: min(91vmin, 700px); transform: scale(.88); transform-origin: bottom; }
+    .flower { --x: 50%; --h: 49vmin; --delay: 0s; position: absolute; left: var(--x); bottom: 7vmin; width: 0; height: var(--h); animation: sway 4.4s ease-in-out var(--delay) infinite alternate; transform-origin: bottom; }
+    .stem { position: absolute; bottom: 0; left: -0.75vmin; width: 1.5vmin; height: 100%; border-radius: 1vmin; background: linear-gradient(90deg,#075c59,#18c1bb 52%,#087b78); box-shadow: 0 0 1.2vmin #1be7d888; animation: grow 1.9s cubic-bezier(.2,.8,.2,1) var(--delay) both; transform-origin: bottom; }
+    .bloom { position: absolute; left: 0; top: -1vmin; width: 0; height: 0; animation: appear .9s cubic-bezier(.15,.85,.2,1) calc(var(--delay) + 1.1s) both; }
+    .petal { position: absolute; left: -5.7vmin; top: -10.6vmin; width: 11.4vmin; height: 14vmin; border-radius: 75% 25% 72% 28% / 63% 37% 63% 37%; background: linear-gradient(135deg,#ecffff 0%,var(--cyan) 36%,#36bfd3 70%,#087fa5 100%); box-shadow: inset .9vmin .5vmin 1.6vmin #fff9, inset -1.3vmin -1vmin 1.6vmin #00789988, 0 0 2.7vmin #58eeef66; transform-origin: 50% 10.5vmin; }
+    .petal:nth-child(1){transform:rotate(0deg)}.petal:nth-child(2){transform:rotate(72deg)}.petal:nth-child(3){transform:rotate(144deg)}.petal:nth-child(4){transform:rotate(216deg)}.petal:nth-child(5){transform:rotate(288deg)}
+    .center { position:absolute; left:-2.1vmin; top:-2.2vmin; width:4.2vmin; height:4.2vmin; border-radius:50%; background:radial-gradient(circle at 38% 32%,#fffbd0,#ffe95c 36%,#e4ae15 75%); box-shadow:0 0 2vmin #ffe96c; z-index:2; }
+    .leaf { position:absolute; width:12vmin; height:5.4vmin; border-radius:100% 0 100% 0; background:linear-gradient(145deg,#23d1b5,#087f71 65%,#034f4c); box-shadow:0 0 1.5vmin #09c9b277; transform-origin:0 50%; animation: leaf-in .8s ease-out calc(var(--delay) + .8s) both; }
+    .leaf::after { content:""; position:absolute; left:0; top:48%; width:100%; height:.35vmin; background:#7affdf88; transform:rotate(-16deg); }
+    .leaf.one { left:0; bottom:31%; transform:rotate(-34deg); }.leaf.two { left:0; bottom:52%; transform:scaleX(-1) rotate(-30deg); }.leaf.three { left:0; bottom:69%; transform:rotate(-22deg) scale(.82); }
+    .flower--left { --x: 29%; --h: 37vmin; --delay: .45s; }.flower--left .bloom { transform:scale(.76); }.flower--right { --x: 70%; --h: 43vmin; --delay: .75s; }.flower--right .bloom { transform:scale(.84); }
+    .grass { position:absolute; bottom:0; width:2vmin; height:23vmin; border-radius:100% 0 0 0; background:linear-gradient(90deg,#026644,#22d789); transform-origin:bottom; animation: blade 3.5s ease-in-out infinite alternate; }
+    .grass:nth-of-type(1){left:6%;height:32vmin;transform:rotate(-23deg)}.grass:nth-of-type(2){left:13%;height:23vmin;transform:rotate(28deg);animation-delay:.6s}.grass:nth-of-type(3){left:20%;height:36vmin;transform:rotate(-14deg);animation-delay:1.3s}.grass:nth-of-type(4){right:20%;height:28vmin;transform:rotate(22deg);animation-delay:1.8s}.grass:nth-of-type(5){right:12%;height:38vmin;transform:rotate(-27deg);animation-delay:.4s}.grass:nth-of-type(6){right:5%;height:25vmin;transform:rotate(24deg);animation-delay:1.1s}
+    .caption { position:absolute; top:5vmin; text-align:center; opacity:0; letter-spacing:.22em; text-transform:uppercase; font-size:clamp(.62rem,1.55vmin,.9rem); color:#a8ffff; text-shadow:0 0 1.5vmin #46ffff; animation: fade 1s ease 2.4s forwards; }
+    @keyframes grow { from { transform:scaleY(0); } } @keyframes appear { from { transform:scale(0) rotate(-20deg); opacity:0; } to { transform:scale(1) rotate(0); opacity:1; } } @keyframes leaf-in { from { opacity:0; } } @keyframes sway { to { transform:rotate(3deg); } } @keyframes blade { to { margin-bottom:1vmin; } } @keyframes twinkle { to { opacity:.25; transform:scale(.45); } } @keyframes fade { to { opacity:.8; } }
+    @media (max-width: 480px) { .garden { transform:scale(.72); } .caption { top:9vmin; } }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; } }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <div class="stars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="caption">A garden that blooms at night</p><div class="glow"></div>
+    <section class="garden" aria-label="Animated glowing flowers">
+      <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
+      <div class="flower flower--left"><div class="stem"></div><div class="leaf one"></div><div class="leaf two"></div><div class="leaf three"></div><div class="bloom"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div></div>
+      <div class="flower"><div class="stem"></div><div class="leaf one"></div><div class="leaf two"></div><div class="leaf three"></div><div class="bloom"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div></div>
+      <div class="flower flower--right"><div class="stem"></div><div class="leaf one"></div><div class="leaf two"></div><div class="leaf three"></div><div class="bloom"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div></div>
+    </section>
+  </main>
+
+
+</body></html>
